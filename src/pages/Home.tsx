@@ -1,7 +1,10 @@
-import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import logo512 from "/512.png";
+import Card from "react-bootstrap/Card";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <img
@@ -13,10 +16,39 @@ const Home = () => {
           marginRight: "auto",
         }}
       />
-      <div style={{textAlign:"center"}}>
-        <h3>Oreo Pika</h3>
-        <p>Oreo.Pika is a cat!!!!</p>
-        <Button>Says Meow</Button>
+      <div style={{ textAlign: "center" }}>
+        <h4>Oreo Pika</h4>
+        <p>What do you want to play?</p>
+        <br />
+        <Card
+          style={{
+            maxWidth: "300px",
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+            backgroundColor: "#1735e0",
+            color: "white",
+            cursor: "pointer",
+            marginBottom: "8px",
+          }}
+          onClick={() => navigate("/catchgame")}
+        >
+          <Card.Body>Catch Game</Card.Body>
+        </Card>
+        <Card
+          style={{
+            maxWidth: "300px",
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+            backgroundColor: "#711cc0",
+            color: "white",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/soundgame")}
+        >
+          <Card.Body>Sound Game</Card.Body>
+        </Card>
       </div>
     </>
   );
