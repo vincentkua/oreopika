@@ -11,21 +11,24 @@ const CatchGame = () => {
 
   useEffect(() => {
     const moveDot = () => {
-      const maxX = window.innerWidth - 100; // Width of the dot (60px)
-      const maxY = window.innerHeight - 180; // Height minus the header height and margin (80+50)
-
-      const newTop = moveDown ? maxY : 0; // Toggle between topmost (0) and bottommost (maxY)
-      setPosition({ top: newTop, left: Math.floor(Math.random() * maxX) });
-
-      setMoveDown(!moveDown); // Toggle direction for the next move
+      changelocation();
       setVisible(true);
     };
 
     if (visible) {
-      const interval = setInterval(moveDot, 4000); // Moves every 4 seconds
+      const interval = setInterval(moveDot, 2000); // Moves every 2 seconds
       return () => clearInterval(interval);
     }
   }, [visible, moveDown]);
+
+  const changelocation = () => {
+    const maxX = window.innerWidth - 100; // Width of the dot (60px)
+    const maxY = window.innerHeight - 180; // Height minus the header height and margin (80+50)
+
+    const newTop = moveDown ? maxY : 0; // Toggle between topmost (0) and bottommost (maxY)
+    setPosition({ top: newTop, left: Math.floor(Math.random() * maxX) });
+    setMoveDown(!moveDown); // Toggle direction for the next move
+  };
 
   useEffect(() => {
     if (exitclick === 5) {
@@ -39,9 +42,10 @@ const CatchGame = () => {
     setTimeout(() => {
       setVisible(true); // Show the new dot after 3 seconds
     }, 3000);
+    changelocation();
   };
 
-  const preventZoomAndDrag = (e:any) => {
+  const preventZoomAndDrag = (e: any) => {
     e.preventDefault(); // Prevent default behavior for zoom and drag
   };
 
@@ -96,7 +100,7 @@ const CatchGame = () => {
                 position: "absolute",
                 top: `${position.top}px`,
                 left: `${position.left}px`,
-                transition: "top 4s, left 4s, opacity 0.5s",
+                transition: "top 2s, left 2s, opacity 2s",
                 cursor: "pointer",
                 opacity: visible ? 1 : 0, // Fade out effect
               }}
