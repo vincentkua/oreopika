@@ -9,7 +9,6 @@ const CatchGame = () => {
   const [exitclick, setExitclick] = useState(0);
   const [moveDown, setMoveDown] = useState(true);
 
-
   useEffect(() => {
     const moveDot = () => {
       const maxX = window.innerWidth - 100; // Width of the dot (60px)
@@ -23,7 +22,7 @@ const CatchGame = () => {
     };
 
     if (visible) {
-      const interval = setInterval(moveDot, 4000); // Moves every 4 second
+      const interval = setInterval(moveDot, 4000); // Moves every 4 seconds
       return () => clearInterval(interval);
     }
   }, [visible, moveDown]);
@@ -42,10 +41,21 @@ const CatchGame = () => {
     }, 3000);
   };
 
+  const preventZoomAndDrag = (e:any) => {
+    e.preventDefault(); // Prevent default behavior for zoom and drag
+  };
+
   return (
     <>
       <div
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          touchAction: "none", // Prevent pinch-zoom on touch devices
+        }}
+        onWheel={preventZoomAndDrag} // Disable zooming with the mouse wheel
+        onDragStart={preventZoomAndDrag} // Disable dragging
       >
         <div
           style={{
@@ -80,7 +90,7 @@ const CatchGame = () => {
               style={{
                 width: "100px",
                 height: "100px",
-                backgroundColor: "white", // Use the random color
+                backgroundColor: "white",
                 borderRadius: "50%",
                 position: "absolute",
                 top: `${position.top}px`,
@@ -89,6 +99,7 @@ const CatchGame = () => {
                 cursor: "pointer",
                 opacity: visible ? 1 : 0, // Fade out effect
               }}
+              onDragStart={preventZoomAndDrag} // Disable dragging for the dot
             >
               <div
                 style={{
