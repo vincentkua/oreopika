@@ -45,6 +45,21 @@ const CatchGame = () => {
     e.preventDefault(); // Prevent default behavior for zoom and drag
   };
 
+  const handleDragStart = (e:any) => {
+    const startX = e.clientX;
+    const startY = e.clientY;
+
+    // Check if dragstart is within the dot's boundaries
+    const dotLeft = position.left;
+    const dotTop = position.top;
+    const dotRight = dotLeft + 100; // 100 is the width of the dot
+    const dotBottom = dotTop + 100; // 100 is the height of the dot
+
+    if (startX >= dotLeft && startX <= dotRight && startY >= dotTop && startY <= dotBottom) {
+      handleClick(); // Trigger the click event if drag starts within the dot
+    }
+  };
+
   return (
     <>
       <div
@@ -55,7 +70,7 @@ const CatchGame = () => {
           touchAction: "none", // Prevent pinch-zoom on touch devices
         }}
         onWheel={preventZoomAndDrag} // Disable zooming with the mouse wheel
-        onDragStart={preventZoomAndDrag} // Disable dragging
+        onDragStart={handleDragStart} // Disable dragging
       >
         <div
           style={{
