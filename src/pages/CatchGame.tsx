@@ -87,6 +87,7 @@ const CatchGame = () => {
           {visible && (
             <div
               onMouseDown={handleClick}
+              onTouchStart={handleClick}
               style={{
                 width: "100px",
                 height: "100px",
