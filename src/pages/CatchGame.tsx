@@ -20,8 +20,8 @@ const CatchGame = () => {
 
   useEffect(() => {
     const moveDot = () => {
-      const maxX = window.innerWidth - 30; // Width of the dot (30px)
-      const maxY = window.innerHeight - 130; // Height minus the header height and margin
+      const maxX = window.innerWidth - 40; // Width of the dot (30px)
+      const maxY = window.innerHeight - 140; // Height minus the header height and margin
 
       const newLeft = Math.floor(Math.random() * maxX);
       const newTop = Math.floor(Math.random() * maxY);
@@ -31,7 +31,7 @@ const CatchGame = () => {
     };
 
     if (visible) {
-      const interval = setInterval(moveDot, 500); // Moves every second
+      const interval = setInterval(moveDot, 1000); // Moves every second
       return () => clearInterval(interval);
     }
   }, [visible]);
@@ -86,8 +86,8 @@ const CatchGame = () => {
             <div
               onClick={handleClick}
               style={{
-                width: "30px",
-                height: "30px",
+                width: "40px",
+                height: "40px",
                 backgroundColor: dotColor, // Use the random color
                 borderRadius: "50%",
                 position: "absolute",
