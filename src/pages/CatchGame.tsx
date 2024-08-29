@@ -6,35 +6,27 @@ const CatchGame = () => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [dotColor, setDotColor] = useState("blue");
   const [exitclick, setExitclick] = useState(0);
+  const [moveDown, setMoveDown] = useState(true);
 
-  const generateRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
 
   useEffect(() => {
     const moveDot = () => {
-      const maxX = window.innerWidth - 40; // Width of the dot (30px)
-      const maxY = window.innerHeight - 140; // Height minus the header height and margin
+      const maxX = window.innerWidth - 100; // Width of the dot (60px)
+      const maxY = window.innerHeight - 180; // Height minus the header height and margin (80+50)
 
-      const newLeft = Math.floor(Math.random() * maxX);
-      const newTop = Math.floor(Math.random() * maxY);
+      const newTop = moveDown ? maxY : 0; // Toggle between topmost (0) and bottommost (maxY)
+      setPosition({ top: newTop, left: Math.floor(Math.random() * maxX) });
 
-      setPosition({ top: newTop, left: newLeft });
+      setMoveDown(!moveDown); // Toggle direction for the next move
       setVisible(true);
     };
 
     if (visible) {
-      const interval = setInterval(moveDot, 1000); // Moves every second
+      const interval = setInterval(moveDot, 4000); // Moves every 4 second
       return () => clearInterval(interval);
     }
-  }, [visible]);
+  }, [visible, moveDown]);
 
   useEffect(() => {
     if (exitclick === 5) {
@@ -48,18 +40,18 @@ const CatchGame = () => {
     setTimeout(() => {
       setVisible(true); // Show the new dot after 3 seconds
     }, 3000);
-    setDotColor(generateRandomColor()); // Set a new random color
   };
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <div
+        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+      >
         <div
           style={{
             textAlign: "center",
             height: "80px",
             backgroundColor: "white",
-            borderBottom: "1px solid lightgray",
           }}
         >
           <p
@@ -86,18 +78,30 @@ const CatchGame = () => {
             <div
               onClick={handleClick}
               style={{
-                width: "40px",
-                height: "40px",
-                backgroundColor: dotColor, // Use the random color
+                width: "100px",
+                height: "100px",
+                backgroundColor: "white", // Use the random color
                 borderRadius: "50%",
                 position: "absolute",
                 top: `${position.top}px`,
                 left: `${position.left}px`,
-                transition: "top 1s, left 1s, opacity 0.5s",
+                transition: "top 4s, left 4s, opacity 0.5s",
                 cursor: "pointer",
                 opacity: visible ? 1 : 0, // Fade out effect
               }}
-            />
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  left: "35px",
+                  top: "35px",
+                  borderRadius: "50%",
+                  backgroundColor: "black",
+                  width: "30px",
+                  height: "30px",
+                }}
+              ></div>
+            </div>
           )}
         </div>
       </div>
