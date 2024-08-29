@@ -93,7 +93,7 @@ const CatchGame = () => {
                 position: "absolute",
                 top: `${position.top}px`,
                 left: `${position.left}px`,
-                transition: "top 1s, left s, opacity 0.5s",
+                transition: "top 1s, left 1s, opacity 0.5s",
                 cursor: "pointer",
                 opacity: visible ? 1 : 0, // Fade out effect
               }}
