@@ -6,8 +6,13 @@ const CatchGame = () => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [exitclick, setExitclick] = useState(0);
+  const [exitClick, setExitClick] = useState(0);
   const [moveDown, setMoveDown] = useState(true);
+  const [backgroundColor, setBackgroundColor] = useState("white");
+
+  useEffect(() => {
+    changelocation();
+  }, []);
 
   useEffect(() => {
     const moveDot = () => {
@@ -31,18 +36,28 @@ const CatchGame = () => {
   };
 
   useEffect(() => {
-    if (exitclick === 5) {
+    if (exitClick === 5) {
       navigate("/");
     }
-  }, [exitclick, navigate]);
+  }, [exitClick, navigate]);
 
   const handleClick = () => {
     setScore(score + 1);
     setVisible(false); // Start fading out the dot
+
+    // Change background color to black and revert after 1 second
+    setBackgroundColor("lightgray");
     setTimeout(() => {
-      setVisible(true); // Show the new dot after 3 seconds
-    }, 3000);
-    changelocation();
+      setBackgroundColor("white");
+    }, 1000);
+
+    setTimeout(() => { // Show the new dot after 1 second
+      setVisible(true);
+    }, 1000);
+
+    setTimeout(() => {
+      changelocation(); // Move the new dot after 1.5 seconds
+    }, 1500);
   };
 
   const preventZoomAndDrag = (e: any) => {
@@ -57,6 +72,8 @@ const CatchGame = () => {
           flexDirection: "column",
           height: "100vh",
           touchAction: "none", // Prevent pinch-zoom on touch devices
+          backgroundColor: "white", // Background color state
+          transition: "background-color 0.5s", // Smooth transition
         }}
         onWheel={preventZoomAndDrag} // Disable zooming with the mouse wheel
         onDragStart={preventZoomAndDrag} // Disable dragging
@@ -65,28 +82,27 @@ const CatchGame = () => {
           style={{
             textAlign: "center",
             height: "80px",
-            backgroundColor: "white",
+            backgroundColor: backgroundColor,
           }}
         >
           <p
             style={{ margin: "0", fontSize: "32px", cursor: "pointer" }}
-            onClick={() => setExitclick(exitclick + 1)}
+            onClick={() => setExitClick(exitClick + 1)}
           >
             {score.toString().padStart(3, "0")}
           </p>
           <p style={{ margin: "0", fontSize: "12px", color: "gray" }}>
-            {exitclick > 0
-              ? `Click 5 times on score to exit (${exitclick})`
+            {exitClick > 0
+              ? `Click 5 times on score to exit (${exitClick})`
               : "Total Score"}
           </p>
         </div>
         <div
           style={{
-            backgroundColor: "white",
             flexGrow: 1,
             position: "relative",
           }}
-          onClick={() => setExitclick(0)}
+          onClick={() => setExitClick(0)}
         >
           {visible && (
             <div
