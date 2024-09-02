@@ -1,7 +1,10 @@
 import { Button } from "react-bootstrap";
-import Meow1 from "../assets/sounds/meow1.mp3";
-import Meow2 from "../assets/sounds/meow2.mp3";
 import Vacuum from "../assets/sounds/vacuum.mp3";
+import MeowAttract1 from "../assets/sounds/MeowAttract1.mp3";
+import MeowAttract2 from "../assets/sounds/MeowAttract2.mp3";
+import MeowAttract3 from "../assets/sounds/MeowAttract3.mp3";
+import MeowScared1 from "../assets/sounds/MeowScared1.mp3";
+import MeowScared2 from "../assets/sounds/MeowScared2.mp3";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -52,13 +55,13 @@ const SoundGame = () => {
 
   return (
     <>
-      <p
-        style={{ color: "gray", cursor: "pointer", paddingLeft: "4px" }}
-        onClick={() => navigate("/")}
-      >
-        <u>&lt; back</u>
-      </p>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" }} className="container">
+        <p
+          style={{ color: "gray", cursor: "pointer", paddingLeft: "4px" }}
+          onClick={() => navigate("/")}
+        >
+          <u>&lt; back</u>
+        </p>
         <h4>Sound Game</h4>
         <div
           style={{
@@ -76,17 +79,54 @@ const SoundGame = () => {
             {formattedElapsedTime}/{formattedDuration} seconds
           </p>
         </div>
+
         <br />
+
+        <div
+          style={{
+            border: "1px solid lightgray",
+            maxWidth: "600px",
+            margin: "auto",
+            borderRadius: "4px",
+            padding: "10px",
+            backgroundColor:"#f0f0f0"
+          }}
+        >
+          <p style={{ fontWeight: "bold" }}>Attract Cat</p>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(MeowAttract1)}>
+            Attract 1 
+          </Button>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(MeowAttract2)}>
+            Attract 2
+          </Button>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(MeowAttract3)}>
+            Attract 3
+          </Button>
+        </div>
+
         <br />
-        <Button style={{ margin: "2px" }} onClick={() => playsound(Meow1)}>
-          Meow 1
-        </Button>
-        <Button style={{ margin: "2px" }} onClick={() => playsound(Meow2)}>
-          Meow 2
-        </Button>
-        <Button style={{ margin: "2px" }} onClick={() => playsound(Vacuum)}>
-          Vacuum
-        </Button>
+
+        <div
+          style={{
+            border: "1px solid lightgray",
+            maxWidth: "600px",
+            margin: "auto",
+            borderRadius: "4px",
+            padding: "10px",
+            backgroundColor:"#f0f0f0"
+          }}
+        >
+          <p style={{ fontWeight: "bold" }}>Scaring Cat</p>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(MeowScared1)}>
+            Scaring 1 
+          </Button>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(MeowScared2)}>
+            Scaring 2
+          </Button>
+          <Button style={{ margin: "2px" }} onClick={() => playsound(Vacuum)}>
+            Scaring 3
+          </Button>
+        </div>
       </div>
     </>
   );
