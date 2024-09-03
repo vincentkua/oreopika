@@ -29,7 +29,7 @@ const Home = () => {
             backgroundColor: "#1735e0",
             color: "white",
             cursor: "pointer",
-            marginBottom: "12px",
+            marginBottom: "16px",
           }}
           onClick={() => navigate("/catchgame")}
         >
@@ -41,7 +41,7 @@ const Home = () => {
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            backgroundColor: "#ad3dcf",
+            backgroundColor: "#1735e0",
             color: "white",
             cursor: "pointer",
           }}
