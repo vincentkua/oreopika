@@ -26,14 +26,14 @@ const Home = () => {
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            backgroundColor: "#1735e0",
+            backgroundColor: "#4e7ada",
             color: "white",
             cursor: "pointer",
             marginBottom: "16px",
           }}
           onClick={() => navigate("/catchgame")}
         >
-          <Card.Body>Catch Game</Card.Body>
+          <Card.Body>Catch The Dot</Card.Body>
         </Card>
         <Card
           style={{
@@ -41,13 +41,13 @@ const Home = () => {
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            backgroundColor: "#1735e0",
+            backgroundColor: "#4e7ada",
             color: "white",
             cursor: "pointer",
           }}
           onClick={() => navigate("/soundgame")}
         >
-          <Card.Body>Sound Game</Card.Body>
+          <Card.Body>Make Some Noise</Card.Body>
         </Card>
       </div>
     </>
