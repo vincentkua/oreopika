@@ -8,7 +8,7 @@ const CatchGame = () => {
   const [visible, setVisible] = useState(true);
   const [exitClick, setExitClick] = useState(0);
   const [moveDown, setMoveDown] = useState(true);
-  const [backgroundColor, setBackgroundColor] = useState("white");
+  const [fontColor, setfontColor] = useState("black");
 
   useEffect(() => {
     changelocation();
@@ -46,9 +46,9 @@ const CatchGame = () => {
     setVisible(false); // Start fading out the dot
 
     // Change background color to black and revert after 1 second
-    setBackgroundColor("lightgray");
+    setfontColor("green");
     setTimeout(() => {
-      setBackgroundColor("white");
+      setfontColor("black");
     }, 1000);
 
     setTimeout(() => { // Show the new dot after 1 second
@@ -82,7 +82,8 @@ const CatchGame = () => {
           style={{
             textAlign: "center",
             height: "80px",
-            backgroundColor: backgroundColor,
+            backgroundColor: "white",
+            color:fontColor
           }}
         >
           <p
